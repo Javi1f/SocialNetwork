@@ -1,10 +1,10 @@
 package co.edu.unbosque.util.algorithm;
 
+import co.edu.unbosque.view.Console;
 import co.edu.unbosque.util.graphs.Edge;
 import co.edu.unbosque.util.graphs.Vertex;
 import co.edu.unbosque.util.simplelist.MyLinkedList;
 import co.edu.unbosque.util.stackqueue.QueueImp;
-import co.edu.unbosque.view.Console;
 
 public class BreadthFirstSearch extends AbstractSearch {
 
