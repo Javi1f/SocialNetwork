@@ -32,6 +32,6 @@ public abstract class AbstractSearch {
 		this.destinationVertex = destinationVertex;
 	}
 	
-	public abstract int runSearch();
+	public abstract String runSearch();
 
 }

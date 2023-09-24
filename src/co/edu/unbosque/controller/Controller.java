@@ -132,21 +132,32 @@ public class Controller {
 				if (index == indexFriend || nameUser1.equalsIgnoreCase(nameUser2)) {
 					Console.printErr("You are indeed connected to yourself");
 					break;
-				}			
-				
-				dfs = new DepthFirstSearch(listNodes.get(index).getData(),
-						listNodes.get(indexFriend).getData());
-				if (dfs.runSearch() == 1) {
-					if (listNodes.get(index).getData().getInfo().getFriends().isEmpty()  || listNodes.get(indexFriend).getData().getInfo().getFriends().isEmpty()  ) {
+				}
+
+				dfs = new DepthFirstSearch(listNodes.get(index).getData(), listNodes.get(indexFriend).getData());
+
+				String[] count = dfs.runSearch().split(",");
+				boolean cont = false;
+				for (int i = 0; i < count.length; i++) {
+					if (count[i].equals(userDAO.getUsers().get(indexFriend).getName())) {
+						cont = true;
+					}
+				}
+				if (!cont) {
+					Console.printErrLine("No connection has been found between them");
+					break;
+				}
+				if ((count.length-2) == 1) {
+					if (listNodes.get(index).getData().getInfo().getFriends().isEmpty()
+							|| listNodes.get(indexFriend).getData().getInfo().getFriends().isEmpty()) {
 						Console.printErrLine("No connection has been found between them");
 						break;
 					}
 					Console.printSuccess("Users have direct communication");
-				} else {
+				} else if ((count.length-2) > 1) {
 					Console.printSuccess("Users have indirect communication");
 				}
-				
-				
+
 				break;
 			}
 			case 4: {
@@ -181,17 +192,29 @@ public class Controller {
 					break;
 				}
 
-				dfs = new DepthFirstSearch(listNodes.get(index).getData(),
-						listNodes.get(indexFriend).getData());
+				dfs = new DepthFirstSearch(listNodes.get(index).getData(), listNodes.get(indexFriend).getData());
 
-				Console.printSuccessLine("The degree of friendship is: " + dfs.runSearch());
+				
+				String[] count = dfs.runSearch().split(",");
+				boolean cont = false;
+				for (int i = 0; i < count.length; i++) {
+					if (count[i].equals(userDAO.getUsers().get(indexFriend).getName())) {
+						cont = true;
+					}
+				}
+				if (!cont) {
+					Console.printErrLine("No connection has been found between them");
+					break;
+				}
+
+				Console.printSuccessLine("The degree of friendship is: " + (count.length-2));
 
 				break;
 			}
 
 			case 5: {
 
-				if (listNodes.size() == 0 || listNodes.size() == 1) {
+				if (listNodes.size() == 2 || listNodes.size() == 1) {
 					Console.printErr("Single user or no users yet");
 					break;
 				}

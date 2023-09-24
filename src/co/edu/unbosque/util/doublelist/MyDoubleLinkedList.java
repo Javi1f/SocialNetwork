@@ -28,10 +28,10 @@ public class MyDoubleLinkedList<T> {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		DNode<T> temp = head;
-		
-		while(temp != null) {
+
+		while (temp != null) {
 			sb.append(temp.getInfo());
-			if(temp.getNext() != null) {
+			if (temp.getNext() != null) {
 				sb.append(" <--> ");
 			}
 			temp = temp.getNext();
@@ -53,16 +53,17 @@ public class MyDoubleLinkedList<T> {
 		}
 
 	}
-	
+
 	public void backward(int... numPositions) {
-		
-		if(numPositions[0] <= 0 || head == null || currentPos == null) return;
+
+		if (numPositions[0] <= 0 || head == null || currentPos == null)
+			return;
 		int backwardPositions = numPositions[0];
-		while(currentPos != null && backwardPositions > 0 ) {
+		while (currentPos != null && backwardPositions > 0) {
 			currentPos = currentPos.getPrev();
 			backwardPositions--;
 		}
-		
+
 	}
 
 	public void insert(T info) {
@@ -87,15 +88,19 @@ public class MyDoubleLinkedList<T> {
 		T info = null;
 		if (currentPos != null) {
 			info = currentPos.getInfo();
-			if (head == currentPos) head = currentPos.getNext(); 
-			else currentPos.getPrev().setNext(currentPos.getNext());
-			
-			if (currentPos.getNext() != null) currentPos.getNext().setPrev(currentPos.getPrev());
-			
+			if (head == currentPos)
+				head = currentPos.getNext();
+			else
+				currentPos.getPrev().setNext(currentPos.getNext());
+
+			if (currentPos.getNext() != null)
+				currentPos.getNext().setPrev(currentPos.getPrev());
+
 			currentPos = currentPos.getNext();
 		}
 		return info;
 
 	}
+
 
 }

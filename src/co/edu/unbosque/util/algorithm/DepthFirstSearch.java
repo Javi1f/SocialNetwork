@@ -32,43 +32,44 @@ public class DepthFirstSearch extends AbstractSearch {
 	}
 
 	@Override
-	public int runSearch() {
+	public String runSearch() {
 
 		nodeStack = new StackImp<Vertex<?>>();
 		visitedNodes = new MyLinkedList<Vertex<?>>();
-		
+
 		if (this.sourceVertex.equals(this.destinationVertex)) {
 //			System.out.println("Nodo destino encontrado a 0 de profundidad");
 //			System.out.println(sourceVertex.getInfo());
-			return 0;
+			return sourceVertex.getInfo() + "";
 		}
 
 		nodeStack.push(this.sourceVertex);
 //		System.out.println("Ruta a seguir para ubicar el nodo");
 
-		int count = 0;
+		String temp = "";
 		while (nodeStack.size() != 0) {
 
 			Vertex<?> current = nodeStack.pop();
-			count++;
 			if (current.equals(this.destinationVertex)) {
 //				System.out.println(destinationVertex.getInfo());
 //				System.out.println("nodo buscado encontrado\n");
-				return count;
+				return temp + "," + destinationVertex.getInfo();
 			} else {
 //				System.out.print(current.getInfo() + " -> ");
+				temp += current.getInfo() + ",";
 				visitedNodes.addLast(current);
 				MyLinkedList<Edge> adjacents = current.getAdyacentEdges();
 				for (int i = 0; i < adjacents.size(); i++) {
-					nodeStack.push(adjacents.get(i).getData().getDestination());
+					Vertex<?> adjacentVertex = adjacents.get(i).getData().getDestination();
+
+					if (!visitedNodes.contains(adjacentVertex)) {
+						nodeStack.push(adjacentVertex);
+					}
 
 				}
-//				while (!adjacents.isEmpty()) {
-//					nodeStack.push(adjacents.extract().getDestination());
-//				}
 			}
 		}
-		return count;
+		return temp;
 	}
 
 }

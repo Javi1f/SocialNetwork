@@ -54,7 +54,7 @@ public class UserDTO {
 		sb.append("Name: " + this.name);
 		sb.append("List of Friends: ");
 		this.friends.forEach(u -> sb.append("\n" + u.getName()));
-		return sb.toString();
+		return this.name;
 	}
 
 }
