@@ -47,6 +47,14 @@ public class UserDTO {
 		this.friends.add(friend);
 	}
 
+	public String friends() {
+		StringBuilder sb = new StringBuilder();
+
+		friends.forEach(f -> sb.append(f.getName() + "\n"));
+
+		return sb.toString();
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
