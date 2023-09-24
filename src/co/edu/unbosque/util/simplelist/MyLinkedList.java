@@ -1,6 +1,9 @@
 package co.edu.unbosque.util.simplelist;
 
-public class MyLinkedList<E> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class MyLinkedList<E> implements Iterable<E> {
 
 	protected Node<E> first;
 
@@ -174,4 +177,27 @@ public class MyLinkedList<E> {
 
 	}
 
+	@Override
+	public Iterator<E> iterator() {
+		return new MyLinkedListIterator();
+	}
+
+	private class MyLinkedListIterator implements Iterator<E> {
+		private Node<E> current = first;
+
+		@Override
+		public boolean hasNext() {
+			return current != null;
+		}
+
+		@Override
+		public E next() {
+			if (!hasNext()) {
+				throw new NoSuchElementException();
+			}
+			E data = current.getData();
+			current = current.getNext();
+			return data;
+		}
+	}
 }

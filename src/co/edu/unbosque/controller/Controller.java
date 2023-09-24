@@ -1,13 +1,24 @@
 package co.edu.unbosque.controller;
 
+import co.edu.unbosque.model.UserDTO;
+import co.edu.unbosque.model.persistence.UserDAO;
+import co.edu.unbosque.util.algorithm.DepthFirstSearch;
+import co.edu.unbosque.util.graphs.Edge;
+import co.edu.unbosque.util.graphs.Graph;
+import co.edu.unbosque.util.graphs.Vertex;
 import co.edu.unbosque.view.Console;
 
 public class Controller {
-	
+
+	private DepthFirstSearch dfs;
+	private Graph g;
+	private UserDAO userDAO;
 	private Console c;
 
 	public Controller() {
-		
+
+		g = new Graph();
+		userDAO = new UserDAO();
 		c = new Console();
 
 	}
@@ -16,7 +27,8 @@ public class Controller {
 
 		ciclo1: while (true) {
 
-			c.printLine("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			c.printLine(
+					"---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 			c.printLine("\n---Welcome To Carelibro, the social network that makes the difference---");
 			c.printLine("\n\n1. Add users");
 			c.printLine("2. Add friend to an account");
@@ -24,7 +36,8 @@ public class Controller {
 			c.printLine("4. Check the degree of friendship between two users");
 			c.printLine("5. Check if there are any disconnected users.");
 			c.printLine("6. Exit");
-			c.printLine("\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			c.printLine(
+					"\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 			ciclo2: while (true) {
 
 				int op = c.readInt();
@@ -33,10 +46,11 @@ public class Controller {
 					c.printLine("---Add users---");
 					c.burnLine();
 					c.printLine("Please, enter your name:");
-					String name = c.readLine();			
+					String name = c.readLine();
 					c.printLine("Please, enter a password:");
-					String password = c.readLine();			
+					String password = c.readLine();
 					c.printLine("User added successfully!");
+					userDAO.create(new UserDTO(name, password, null));
 					break ciclo2;
 				}
 
@@ -49,10 +63,18 @@ public class Controller {
 					c.printLine("2. Enter the name of the friend you want to add to this account");
 					String nameFriend = c.readLine();
 					c.printLine("Friend added successfully!");
-//Falta agregar función para agregar amigos
-					break ciclo2;
-					}
 
+					Vertex<UserDTO> vertexName = g.getVertex(name);
+					Vertex<UserDTO> vertexNameFriend = g.getVertex(nameFriend);
+
+					Edge edge = new Edge(vertexName, vertexNameFriend, 1);
+					
+					vertexName.addEdge(edge);
+					vertexNameFriend.addEdge(edge);
+					
+					//Falta agregar función para agregar amigos
+					break ciclo2;
+				}
 
 				case 3: {
 					c.printLine("---Check if two users have direct or indirect messaging---");
@@ -61,25 +83,25 @@ public class Controller {
 					String nameUser1 = c.readLine();
 					c.printLine("Enter the name of the second user");
 					String nameUser2 = c.readLine();
-					
+
 //Falta agregar función para determinar si los usuarios se escriben o no
-					//if(usuariosSeEscriben){
-					//    c.printLine("Users write direct messages to each other");
-				//    }else{
-				//        c.printLine("Users do not write direct messages");
-				//
-				//    }
+					// if(usuariosSeEscriben){
+					// c.printLine("Users write direct messages to each other");
+					// }else{
+					// c.printLine("Users do not write direct messages");
+					//
+					// }
 					break ciclo2;
 				}
 				case 4: {
-					
+
 					c.printLine("---Check the degree of friendship between two users---");
 					c.burnLine();
 					c.printLine("Enter the name of the first user:");
 					String nameUser1 = c.readLine();
 					c.printLine("Enter the name of the second user:");
 					String nameUser2 = c.readLine();
-					
+
 //Falta agregar función para determinar el grado de amistad entre los usuarios
 					break ciclo2;
 				}
@@ -89,8 +111,7 @@ public class Controller {
 					c.burnLine();
 					c.printLine("Enter the name of the user you want to see if they have friends or not:");
 					String nameUser1 = c.readLine();
-					
-					
+
 //Falta agregar función para determinar si un usuario es desconexo(no tiene amigos) 
 					break ciclo2;
 				}
@@ -105,5 +126,5 @@ public class Controller {
 			}
 		}
 	}
-	
+
 }

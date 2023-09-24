@@ -23,7 +23,6 @@ public class UserDAO {
 	public void create(Object o) {
 
 		users.add((UserDTO) o);
-
 	}
 
 	public void update(int i, Object o) {

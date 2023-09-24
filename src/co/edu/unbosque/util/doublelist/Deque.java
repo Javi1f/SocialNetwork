@@ -1,4 +1,4 @@
-package co.edu.unbosque.doublelist;
+package co.edu.unbosque.util.doublelist;
 
 public interface Deque<T> {
 
