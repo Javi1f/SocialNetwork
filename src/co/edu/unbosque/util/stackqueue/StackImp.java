@@ -1,7 +1,7 @@
 package co.edu.unbosque.util.stackqueue;
 
-import co.edu.unbosque.doublelist.DNode;
-import co.edu.unbosque.doublelist.DequeList;
+import co.edu.unbosque.util.doublelist.DNode;
+import co.edu.unbosque.util.doublelist.DequeList;
 
 public class StackImp<T> implements Stack<T> {
 

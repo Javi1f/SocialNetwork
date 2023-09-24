@@ -1,20 +1,21 @@
 package co.edu.unbosque.util.simplelist;
 
 //<E> Generico permite crear un objeto de tal forma que los datos que pueda tener sea cualquiera.
-public class Node <E>{
+public class Node<E> {
 
 	private E data;
 	private Node<E> next;
-	
+
 	public Node() {
 	}
-	
-	//Cuando se vaya a crear el primer nodo, porque todavía no tiene siguiente (null)
+
+	// Cuando se vaya a crear el primer nodo, porque todavï¿½a no tiene siguiente
+	// (null)
 	public Node(E data) {
-		this(data, null); //Referencia al constructor completo (el de abajo)
+		this(data, null); // Referencia al constructor completo (el de abajo)
 	}
 
-	//Cuando se vaya a crear otro nodo despues del primero
+	// Cuando se vaya a crear otro nodo despues del primero
 	public Node(E data, Node<E> next) {
 		super();
 		this.data = data;
@@ -41,8 +42,6 @@ public class Node <E>{
 	public String toString() {
 		return "Node [data=" + data + ", next=" + next + "]";
 	}
-	
-	
-	
-	
+	// Nodo actual
+
 }
