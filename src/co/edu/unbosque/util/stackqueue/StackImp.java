@@ -10,6 +10,18 @@ public class StackImp<T> implements Stack<T> {
 	public StackImp() {
 		data = new DequeList<T>();
 	}
+	
+	public DequeList<T> getData() {
+		return data;
+	}
+
+
+
+	public void setData(DequeList<T> data) {
+		this.data = data;
+	}
+
+
 
 	@Override
 	public void push(T info) {
