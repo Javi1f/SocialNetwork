@@ -1,6 +1,5 @@
 package co.edu.unbosque.util.algorithm;
 
-import co.edu.unbosque.view.Console;
 import co.edu.unbosque.util.graphs.Edge;
 import co.edu.unbosque.util.graphs.Vertex;
 import co.edu.unbosque.util.simplelist.MyLinkedList;
@@ -13,8 +12,7 @@ public class DepthFirstSearch extends AbstractSearch {
 
 	public DepthFirstSearch(Vertex<?> sourceVertex, Vertex<?> destinationVertex) {
 		super(sourceVertex, destinationVertex);
-		nodeStack = new StackImp<Vertex<?>>();
-		visitedNodes = new MyLinkedList<Vertex<?>>();
+
 	}
 
 	public StackImp<Vertex<?>> getNodeStack() {
@@ -34,36 +32,43 @@ public class DepthFirstSearch extends AbstractSearch {
 	}
 
 	@Override
-	public String runSearch() {
+	public int runSearch() {
+
+		nodeStack = new StackImp<Vertex<?>>();
+		visitedNodes = new MyLinkedList<Vertex<?>>();
+		
 		if (this.sourceVertex.equals(this.destinationVertex)) {
-			Console.printSuccessLine("Nodo destino encontrado. Profunidad: 0");
-			Console.printSuccessLine(this.sourceVertex.getInfo().toString());
-			return "0";
+//			System.out.println("Nodo destino encontrado a 0 de profundidad");
+//			System.out.println(sourceVertex.getInfo());
+			return 0;
 		}
 
 		nodeStack.push(this.sourceVertex);
-		Console.printLine("Ruta a seguir para ubicar el nodo");
+//		System.out.println("Ruta a seguir para ubicar el nodo");
+
 		int count = 0;
 		while (nodeStack.size() != 0) {
 
 			Vertex<?> current = nodeStack.pop();
-
+			count++;
 			if (current.equals(this.destinationVertex)) {
-				Console.printSuccessLine(this.destinationVertex.getInfo().toString());
-				Console.printSuccessLine("Nodo buscado encontrado.");
-				return count + "";
+//				System.out.println(destinationVertex.getInfo());
+//				System.out.println("nodo buscado encontrado\n");
+				return count;
 			} else {
-				Console.print(current.getInfo().toString() + " -> ");
+//				System.out.print(current.getInfo() + " -> ");
 				visitedNodes.addLast(current);
 				MyLinkedList<Edge> adjacents = current.getAdyacentEdges();
-				count++;
-				while (!adjacents.isEmpty()) {
-					nodeStack.push(adjacents.extract().getDestination());
-				}
+				for (int i = 0; i < adjacents.size(); i++) {
+					nodeStack.push(adjacents.get(i).getData().getDestination());
 
+				}
+//				while (!adjacents.isEmpty()) {
+//					nodeStack.push(adjacents.extract().getDestination());
+//				}
 			}
 		}
-		return "";
+		return count;
 	}
 
 }

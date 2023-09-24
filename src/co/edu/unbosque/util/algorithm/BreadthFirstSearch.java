@@ -16,12 +16,12 @@ public class BreadthFirstSearch extends AbstractSearch {
 	}
 
 	@Override
-	public String runSearch() {
+	public int runSearch() {
 
 		if (sourceVertex.equals(destinationVertex)) {
 			Console.printSuccessLine("Objetico encontrado en la anchura 0");
 			Console.printSuccessLine(sourceVertex.getInfo().toString());
-			return "0";
+			return 0;
 		}
 
 		QueueImp<Vertex<?>> queueOfNodes = new QueueImp<>();
@@ -35,7 +35,7 @@ public class BreadthFirstSearch extends AbstractSearch {
 			if (actual.equals(destinationVertex)) {
 				Console.printSuccessLine(actual.getInfo().toString());
 				Console.printSuccessLine("Nodo de destino encontrado");
-				return count + "";
+				return count;
 			} else {
 				System.out.print(actual.getInfo() + "->");
 				if (actual.getAdyacentEdges().isEmpty()) {
@@ -52,7 +52,7 @@ public class BreadthFirstSearch extends AbstractSearch {
 			visitedNodes.addLast(actual);
 
 		}
-		return "-1";
+		return -1;
 	}
 
 }

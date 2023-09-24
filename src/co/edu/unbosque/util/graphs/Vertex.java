@@ -33,6 +33,6 @@ public class Vertex<T> {
 
 	@Override
 	public String toString() {
-		return "\nVertex [info=" + info + ", adyacentEdges=" + adyacentEdges + "]";
+		return "\nVertex [info=\n" + info + ", adyacentEdges=\n" + adyacentEdges.toString() + "\n]";
 	}
 }
