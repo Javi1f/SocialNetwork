@@ -162,6 +162,23 @@ public class MyLinkedList<E> implements Iterable<E> {
 		return dataPos;
 	}
 
+	public boolean contains(E data) {
+		Node<E> currentNode = this.first;
+		boolean contain = false;
+		if (!isEmpty()) {
+
+			while (currentNode != null && !(contain)) {
+				if (currentNode.getData().equals(data)) {
+					contain = true;
+				} else {
+					currentNode = currentNode.getNext();
+				}
+			}
+		}
+		return contain;
+
+	}
+
 	@Override
 	public String toString() {
 		String textList = "";

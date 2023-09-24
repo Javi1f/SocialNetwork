@@ -21,8 +21,8 @@ public class Graph {
 		this.listOfNodes = listOfNodes;
 	}
 	
-	public Vertex getVertex(String nombre) {
-		for (Vertex vertex : listOfNodes) {
+	public Vertex<?> getVertex(String nombre) {
+		for (Vertex<?> vertex : listOfNodes) {
 			if (vertex.getInfo().equals(nombre)) {
 				return vertex; 
 			}
