@@ -27,29 +27,30 @@ public class Controller {
 	public void run() {
 		playMusica(0);
 		ciclo1: while (true) {
-			
-			
-			
-			Console.printLine("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+
+			Console.printLine(
+					"---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 			Console.printLine("\n---Welcome To Carelibro, the social network that makes the difference---");
-			Console.printLine("\n----------------------------Options----------------------------                      ");	
+			Console.printLine(
+					"\n----------------------------Options----------------------------                      ");
 			Console.print("                                                               |");
 			Console.printLine("\n1. Add users.                                                  |");
 			Console.printLine("2. Add friend to an account.                                   |");
 			Console.printLine("3. Check if two users have direct or indirect messaging.       |");
 			Console.printLine("4. Check the degree of friendship between two users.           |");
 			Console.printLine("5. Check if there are any disconnected users.                  |");
-			Console.printLine("6. Exit.                                                       |");
+			Console.printLine("6. Show Users.                                                 |");
+			Console.printLine("7. Exit.                                                       |");
 			Console.print("                                                               |");
-			Console.printLine("\n---------------------------------------------------------------                      ");	
-			Console.print("Please, enter the option you want to use:"); int op = Console.readInt();
-			Console.printLine("\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			Console.printLine(
+					"\n---------------------------------------------------------------                      ");
+			Console.print("Please, enter the option you want to use:");
+			int op = Console.readInt();
+			Console.printLine(
+					"\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-			ciclo2: while(true) {
-				
-				
+			ciclo2: while (true) {
 
-				
 				switch (op) {
 				case 1: {
 					Console.printLine("--------Add users--------");
@@ -159,14 +160,14 @@ public class Controller {
 						Console.printErrLine("No connection has been found between them.");
 						break ciclo2;
 					}
-					if ((count.length-2) == 1) {
+					if ((count.length - 2) == 1) {
 						if (listNodes.get(index).getData().getInfo().getFriends().isEmpty()
 								|| listNodes.get(indexFriend).getData().getInfo().getFriends().isEmpty()) {
 							Console.printErrLine("No connection has been found between them.");
 							break ciclo2;
 						}
 						Console.printSuccess("Users have direct communication.\n");
-					} else if ((count.length-2) > 1) {
+					} else if ((count.length - 2) > 1) {
 						Console.printSuccess("Users have indirect communication.\n");
 					}
 
@@ -206,7 +207,6 @@ public class Controller {
 
 					dfs = new DepthFirstSearch(listNodes.get(index).getData(), listNodes.get(indexFriend).getData());
 
-					
 					String[] count = dfs.runSearch().split(",");
 					boolean cont = false;
 					for (int i = 0; i < count.length; i++) {
@@ -219,14 +219,14 @@ public class Controller {
 						break ciclo2;
 					}
 
-					Console.printSuccessLine("The degree of friendship is: " + (count.length-2));
+					Console.printSuccessLine("The degree of friendship is: " + (count.length - 2));
 
 					break ciclo2;
 				}
 
 				case 5: {
 
-					if (listNodes.size() == 2 || listNodes.size() == 1) {
+					if (listNodes.size() == 0 || listNodes.size() == 1) {
 						Console.printErr("Single user or no users yet.\n");
 						break ciclo2;
 					}
@@ -247,18 +247,25 @@ public class Controller {
 					break ciclo2;
 				}
 				case 6: {
+					if (listNodes.size() == 0) {
+						Console.printErr("No users yet.\n");
+						break ciclo2;
+					}
+					Console.printLine(userDAO.show());
+
+					break ciclo1;
+				}
+				case 7: {
 					Console.printLine("The program was closed correctly. "
 							+ "\n\nWe hope to have it again soon in our application, the only one that makes the difference.");
 
 					break ciclo1;
 				}
-			}
-			
+				}
 
 			}
 		}
-		
-		
+
 	}
 	public void playMusica(int i) {
 

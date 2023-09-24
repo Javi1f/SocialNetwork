@@ -36,7 +36,11 @@ public class UserDAO {
 	public String show() {
 
 		StringBuilder sb = new StringBuilder();
-		users.forEach(u -> sb.append(u.toString() + "\n"));
+		users.forEach(u ->
+
+		sb.append("Name: " + u.getName() + "\nFriends: \n" + u.friends() + "\n")
+
+		);
 
 		return sb.toString();
 
